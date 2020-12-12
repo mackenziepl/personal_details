@@ -2,9 +2,8 @@ package utils;
 
 import domain.Person;
 import org.apache.commons.lang3.StringUtils;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -34,7 +33,8 @@ public class CsvParserUtils {
         Path path = Paths.get("data/dane-osoby.csv");
         List<String> read = new ArrayList<>();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path.toString()))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                new FileInputStream(path.toString()), "windows-1250"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 if(StringUtils.isNotEmpty(line)) read.add(line);
